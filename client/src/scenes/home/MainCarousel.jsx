@@ -18,7 +18,7 @@ export const heroTextureImports = importAll(
 );
 
 const MainCarousel = () => {
-  const isNonMobile = useMediaQuery('(min-width:600px');
+  const isNonMobile = useMediaQuery('(min-width:600px)');
 
   return (
     <Carousel
@@ -26,7 +26,7 @@ const MainCarousel = () => {
       showThumbs={false}
       showIndicators={false}
       showStatus={false}
-      renderArrowPrev={(onClickHandler, hasPrev, label) => {
+      renderArrowPrev={(onClickHandler, hasPrev, label) => (
         <IconButton
           onClick={onClickHandler}
           sx={{
@@ -39,9 +39,9 @@ const MainCarousel = () => {
           }}
         >
           <NavigateBeforeIcon sx={{ fontSize: 40 }} />
-        </IconButton>;
-      }}
-      renderArrowNext={(onClickHandler, hasNext, label) => {
+        </IconButton>
+      )}
+      renderArrowNext={(onClickHandler, hasNext, label) => (
         <IconButton
           onClick={onClickHandler}
           sx={{
@@ -54,9 +54,49 @@ const MainCarousel = () => {
           }}
         >
           <NavigateNextIcon sx={{ fontSize: 40 }} />
-        </IconButton>;
-      }}
-    ></Carousel>
+        </IconButton>
+      )}
+    >
+      {Object.values(heroTextureImports).map((texture, index) => (
+        <Box key={`carousel-image-${index}`}>
+          <img
+            src={texture}
+            alt={`carousel-${index}`}
+            style={{
+              width: '100%',
+              height: '700px',
+              // objectFit css property: allows for responsive behaviour,
+              // suitable for images where center or image is most important part
+              objectFit: 'cover',
+              backgroundAttachment: 'fixed',
+            }}
+          />
+          <Box
+            color="white"
+            padding="20px"
+            borderRadius="1px"
+            textAlign="left"
+            backgroundColor="rgb(0, 0, 0, 0.4)"
+            position="absolute"
+            top="46%"
+            left={isNonMobile ? '10%' : '0'}
+            right={isNonMobile ? undefined : '0'}
+            margin={isNonMobile ? undefined : '0 auto'}
+            maxWidth={isNonMobile ? undefined : '240px'}
+          >
+            <Typography color={shades.secondary[200]}>--NEW ITEMS</Typography>
+            <Typography variant="h1">Summer Sale</Typography>
+            <Typography
+              fontWeight="bold"
+              color={shades.secondary[300]}
+              sx={{ textDecoration: 'underlined' }}
+            >
+              Discover More
+            </Typography>
+          </Box>
+        </Box>
+      ))}
+    </Carousel>
   );
 };
 
