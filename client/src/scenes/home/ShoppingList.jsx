@@ -30,7 +30,42 @@ const ShoppingList = () => {
     getItems();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <div>shopping list</div>;
+  const kaliSeries = items.filter(
+    (item) => item.attributes.series === 'Kali the Werewolf'
+  );
+  const draculaCthuluSeries = items.filter(
+    (item) =>
+      item.attributes.series === 'Dracula Vs Cthulhu. Sortof And Other Stories'
+  );
+
+  return (
+    <Box width="80%" margin="80px auto">
+      <Typography variant="h3" textAlign="center">
+        Our Featured <b>Products</b>
+      </Typography>
+      <Tabs
+        textColor="primary"
+        indicatorColor="primary"
+        value={value}
+        onChange={handleChange}
+        centered
+        TabIndicatorProps={{ sx: { display: isNonMobile ? 'block' : 'none' } }}
+        sx={{
+          m: '25px',
+          '& .MuiTabs-flexContainer': {
+            flexWrap: 'wrap',
+          },
+        }}
+      >
+        <Tab label="ALL" value="all" />
+        <Tab label="KALI THE WEREWOLF" value="kaliTheWerewolf" />
+        <Tab
+          label="DRACULA VS CTHULU... SORT OF AND OTHER STORIES"
+          value="draculaVsCthuluSortOfAndOtherStories"
+        />
+      </Tabs>
+    </Box>
+  );
 };
 
 export default ShoppingList;
