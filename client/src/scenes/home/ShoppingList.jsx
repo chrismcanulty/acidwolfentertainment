@@ -10,7 +10,6 @@ const ShoppingList = () => {
   const [value, setValue] = useState('all');
   const items = useSelector((state) => state.cart.items);
   const isNonMobile = useMediaQuery('(min-width:600px)');
-  console.log('🚀 ~ ShoppingList ~ items:', items);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -28,7 +27,7 @@ const ShoppingList = () => {
 
   useEffect(() => {
     getItems();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [items]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const kaliSeries = items.filter(
     (item) => item.attributes.series === 'Kali the Werewolf'
@@ -37,6 +36,8 @@ const ShoppingList = () => {
     (item) =>
       item.attributes.series === 'Dracula Vs Cthulhu. Sortof And Other Stories'
   );
+
+  console.log('🚀 ITEMS items:', items);
 
   return (
     <Box width="80%" margin="80px auto">
@@ -64,6 +65,28 @@ const ShoppingList = () => {
           value="draculaVsCthuluSortOfAndOtherStories"
         />
       </Tabs>
+      <Box
+        margin="0 auto"
+        // use grid display for responsive resizing based on screen size
+        display="grid"
+        gridTemplateColumns="repeat(auto-fill, 300px)"
+        justifyContent="space-around"
+        rowGap="20px"
+        columnGap="1.33%"
+      >
+        {value === 'all' &&
+          items.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+        {value === 'kaliSeries' &&
+          kaliSeries.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+        {value === 'draculaCthuluSeries' &&
+          draculaCthuluSeries.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+      </Box>
     </Box>
   );
 };

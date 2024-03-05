@@ -16,7 +16,8 @@ const Item = ({ item, width }) => {
     palette: { neutral },
   } = useTheme();
 
-  const { category, price, name, image } = item.attributes;
+  const { series, price, name, image } = item.attributes;
+
   const {
     data: {
       attributes: {
@@ -26,6 +27,7 @@ const Item = ({ item, width }) => {
       },
     },
   } = image;
+  // console.log('🚀 ~ Item ~ image:', image);
 
   return (
     <Box width={width}>
@@ -45,7 +47,7 @@ const Item = ({ item, width }) => {
           style={{ cursor: 'pointer' }}
         />
         <Box
-          display={isHovered ? 'blocked' : 'none'}
+          display={isHovered ? 'block' : 'none'}
           position="absolute"
           bottom="10%"
           left="0"
@@ -84,7 +86,7 @@ const Item = ({ item, width }) => {
 
       <Box mt="3px">
         <Typography variant="subtitle2" color={neutral.dark}>
-          {category
+          {series
             .replace(/([A-Z])/g, ' $1')
             .replace(/^./, (str) => str.toUpperCase())}
         </Typography>
