@@ -18,16 +18,24 @@ const Item = ({ item, width }) => {
 
   const { series, price, name, image } = item.attributes;
 
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image;
-  // console.log('🚀 ~ Item ~ image:', image);
+  // const {
+  //   data: {
+  //     attributes: {
+  //       formats: {
+  //         medium: { url },
+  //       },
+  //     },
+  //   },
+  // } = image;
+
+  // const {
+  //   data: {
+  //     attributes: { url: alternateUrl },
+  //   },
+  // } = image;
+
+  const { url } =
+    image.data.attributes?.formats.medium || image.data.attributes;
 
   return (
     <Box width={width}>
@@ -86,9 +94,7 @@ const Item = ({ item, width }) => {
 
       <Box mt="3px">
         <Typography variant="subtitle2" color={neutral.dark}>
-          {series
-            .replace(/([A-Z])/g, ' $1')
-            .replace(/^./, (str) => str.toUpperCase())}
+          {series}
         </Typography>
         <Typography>{name}</Typography>
         <Typography fontWeight="bold">${price}</Typography>
@@ -98,3 +104,6 @@ const Item = ({ item, width }) => {
 };
 
 export default Item;
+
+// .replace(/([A-Z])/g, ' $1') // .replace(/^./, (str) =>
+// str.toUpperCase())}
