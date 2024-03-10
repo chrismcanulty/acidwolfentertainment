@@ -27,7 +27,7 @@ const ShoppingList = () => {
 
   useEffect(() => {
     getItems();
-  }, [items]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const kaliSeries = items.filter(
     (item) => item.attributes.series === 'Kali the Werewolf'
@@ -37,8 +37,6 @@ const ShoppingList = () => {
     (item) =>
       item.attributes.series === 'Dracula Vs Cthulhu. Sortof And Other Stories'
   );
-
-  console.log('🚀 ITEMS items:', items);
 
   return (
     <Box width="80%" margin="80px auto">

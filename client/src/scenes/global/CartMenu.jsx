@@ -26,7 +26,7 @@ const CartMenu = () => {
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
 
   const totalPrice = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price;
+    return Math.round((total + item.count * item.attributes.price) * 100) / 100;
   }, 0);
 
   return (
@@ -68,7 +68,11 @@ const CartMenu = () => {
                       alt={item?.name}
                       width="123px"
                       height="164px"
-                      src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                      src={
+                        item.attributes.image.data.attributes.url
+                          ? `http://localhost:1337${item?.attributes?.image?.data?.attributes?.url}`
+                          : `http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`
+                      }
                     />
                   </Box>
                   <Box flex="1 1 60%">
@@ -95,7 +99,7 @@ const CartMenu = () => {
                       >
                         <IconButton
                           onClick={() =>
-                            dispatch(decreaseCount({ item: item.id }))
+                            dispatch(decreaseCount({ id: item.id }))
                           }
                         >
                           <RemoveIcon />
@@ -103,7 +107,7 @@ const CartMenu = () => {
                         <Typography>{item.count}</Typography>
                         <IconButton
                           onClick={() =>
-                            dispatch(increaseCount({ item: item.id }))
+                            dispatch(increaseCount({ id: item.id }))
                           }
                         >
                           <AddIcon />
@@ -111,7 +115,7 @@ const CartMenu = () => {
                       </Box>
 
                       {/* PRICE */}
-                      <Typography fontweight="bold">
+                      <Typography fontWeight="bold">
                         ${item.attributes.price}
                       </Typography>
                     </FlexBox>
