@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IconButton, Box, Typography, useTheme, Button } from '@mui/material';
-import AddIcon from '@mui/material/Add';
+import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { shades } from '../theme';
 import { addToCart } from '../state';
@@ -16,16 +16,10 @@ const Item = ({ item, width }) => {
     palette: { neutral },
   } = useTheme();
 
-  const { category, price, name, image } = item.attributes;
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image;
+  const { series, price, name, image } = item.attributes;
+
+  const { url } =
+    image.data.attributes?.formats.medium || image.data.attributes;
 
   return (
     <Box width={width}>
@@ -45,7 +39,7 @@ const Item = ({ item, width }) => {
           style={{ cursor: 'pointer' }}
         />
         <Box
-          display={isHovered ? 'blocked' : 'none'}
+          display={isHovered ? 'block' : 'none'}
           position="absolute"
           bottom="10%"
           left="0"
@@ -84,9 +78,7 @@ const Item = ({ item, width }) => {
 
       <Box mt="3px">
         <Typography variant="subtitle2" color={neutral.dark}>
-          {category
-            .replace(/([A-Z])/g, ' $1')
-            .replace(/^./, (str) => str.toUpperCase())}
+          {series}
         </Typography>
         <Typography>{name}</Typography>
         <Typography fontWeight="bold">${price}</Typography>
