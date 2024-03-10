@@ -32,6 +32,7 @@ const ShoppingList = () => {
   const kaliSeries = items.filter(
     (item) => item.attributes.series === 'Kali the Werewolf'
   );
+
   const draculaCthuluSeries = items.filter(
     (item) =>
       item.attributes.series === 'Dracula Vs Cthulhu. Sortof And Other Stories'
@@ -78,11 +79,11 @@ const ShoppingList = () => {
           items.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
-        {value === 'kaliSeries' &&
+        {value === 'kaliTheWerewolf' &&
           kaliSeries.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
-        {value === 'draculaCthuluSeries' &&
+        {value === 'draculaVsCthuluSortOfAndOtherStories' &&
           draculaCthuluSeries.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}

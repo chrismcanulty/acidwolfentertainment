@@ -18,22 +18,6 @@ const Item = ({ item, width }) => {
 
   const { series, price, name, image } = item.attributes;
 
-  // const {
-  //   data: {
-  //     attributes: {
-  //       formats: {
-  //         medium: { url },
-  //       },
-  //     },
-  //   },
-  // } = image;
-
-  // const {
-  //   data: {
-  //     attributes: { url: alternateUrl },
-  //   },
-  // } = image;
-
   const { url } =
     image.data.attributes?.formats.medium || image.data.attributes;
 
