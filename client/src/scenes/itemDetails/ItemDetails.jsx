@@ -58,6 +58,38 @@ const ItemDetails = () => {
           />
         </Box>
         {/* ACTION */}
+        <Box flex="1 1 50%" mb="40px">
+          <Box display="flex" justifyContent="space-between">
+            <Box>Home/Item</Box>
+            <Box>Prev Next</Box>
+          </Box>
+
+          <Box m="65px 0 25px 0">
+            <Typography variant="h3">{item?.attributes?.name}</Typography>
+            <Typography>{item?.attributes?.price}</Typography>
+            <Typography sx={{ mt: '20px' }}>
+              {item?.attributes?.longDescription[0]?.children[0]?.text}
+            </Typography>
+          </Box>
+
+          <Box display="flex" alignItems="center" minHeight="50px">
+            <Box
+              display="flex"
+              alignItems="center"
+              border={`1.5px solid ${shades.neutral[300]}`}
+              mr="20px"
+              p="2px 5px"
+            >
+              <IconButton onClick={() => setCount(Math.max(count - 1), 1)}>
+                <RemoveIcon />
+              </IconButton>
+              <Typography sx={{ p: '0 5px' }}>{count}</Typography>
+              <IconButton onClick={() => setCount(Math.max(count + 1), 1)}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
