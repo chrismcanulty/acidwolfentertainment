@@ -33,10 +33,35 @@ const ItemDetails = () => {
   async function getItems() {
     const items = await fetch(
       'http://localhost:1337/api/items?populate=image',
-      { method: 'GET' }
+      {
+        method: 'GET',
+      }
     );
+
     const itemsJson = await items.json();
     setItems(itemsJson.data);
+  }
+
+  function shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    console.log('array', array, items);
+
+    return array;
   }
 
   useEffect(() => {
@@ -115,6 +140,37 @@ const ItemDetails = () => {
         </Box>
       </Box>
       {/* INFO */}
+      <Box m="20px 0">
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="DESCRIPTION" value="description" />
+          <Tab label="REVIEWS" value="reviews" />
+        </Tabs>
+      </Box>
+      <Box display="flex" flexWrap="wrap" gap="15px">
+        {value === 'description' && (
+          <div>{item?.attributes?.longDescription[0]?.children[0]?.text}</div>
+        )}
+        {value === 'reviews' && <div>reviews</div>}
+      </Box>
+      {/* RELATED PRODUCTS */}
+      <Box mt="50px" width="100%">
+        <Typography variant="h3" fontWeight="bold">
+          Related Products
+        </Typography>
+        <Box
+          mt="20px"
+          display="flex"
+          flexWrap="wrap"
+          columnGap="1.33%"
+          justifyContent="space-between"
+        >
+          {shuffle(items)
+            .slice(0, 4)
+            .map((item, i) => (
+              <Item key={`${item.name}-${i}`} item={item} />
+            ))}
+        </Box>
+      </Box>
     </Box>
   );
 };
