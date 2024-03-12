@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IconButton, Box, Typography, Button, Tabs, Tab } from '@mui/material';
-import { FavoriteBorderOutlinedIcon } from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { shades } from '../../theme';
@@ -72,6 +72,7 @@ const ItemDetails = () => {
             </Typography>
           </Box>
 
+          {/* COUNT, BUTTON */}
           <Box display="flex" alignItems="center" minHeight="50px">
             <Box
               display="flex"
@@ -88,9 +89,32 @@ const ItemDetails = () => {
                 <AddIcon />
               </IconButton>
             </Box>
+            <Button
+              sx={{
+                backgroundColor: '#222222',
+                color: 'white',
+                borderRadius: 0,
+                minWidth: '150px',
+                padding: '10px 40px',
+              }}
+              onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
+            >
+              ADD TO CART
+            </Button>
+          </Box>
+
+          <Box>
+            <Box m="20px 0 5px 0" display="flex">
+              <FavoriteBorderOutlinedIcon />
+              <Typography sx={{ ml: '5px' }}>ADD TO WISHLIST</Typography>
+            </Box>
+            {item?.attributes?.series && (
+              <Typography>SERIES: {item?.attributes?.series}</Typography>
+            )}
           </Box>
         </Box>
       </Box>
+      {/* INFO */}
     </Box>
   );
 };
