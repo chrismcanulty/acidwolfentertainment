@@ -1,4 +1,5 @@
-import { Box, Typography, TextField } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
   return (
@@ -16,8 +17,6 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
           onChange={handleChange}
           value={values.email}
           name="email"
-          // convert to boolean forcibly. Formatting per Address Form not needed
-          // since fields are not nested within an object in this step
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
           sx={{ gridColumn: 'span 4', marginBottom: '15px' }}
@@ -30,11 +29,9 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
           onChange={handleChange}
           value={values.phoneNumber}
           name="phoneNumber"
-          // convert to boolean forcibly. Formatting per Address Form not needed
-          // since fields are not nested within an object in this step
           error={!!touched.phoneNumber && !!errors.phoneNumber}
           helperText={touched.phoneNumber && errors.phoneNumber}
-          sx={{ gridColumn: 'span 4', marginBottom: '15px' }}
+          sx={{ gridColumn: 'span 4' }}
         />
       </Box>
     </Box>
