@@ -59,8 +59,6 @@ const ItemDetails = () => {
       ];
     }
 
-    console.log('array', array, items);
-
     return array;
   }
 

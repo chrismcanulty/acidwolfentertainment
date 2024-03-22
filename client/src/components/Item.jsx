@@ -80,7 +80,7 @@ const Item = ({ item, width }) => {
         <Typography variant="subtitle2" color={neutral.dark}>
           {series}
         </Typography>
-        <Typography textWrap="wrap" width="300px">
+        <Typography textwrap="wrap" width="300px">
           {name}
         </Typography>
         <Typography fontWeight="bold">${price}</Typography>
