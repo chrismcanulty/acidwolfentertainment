@@ -12,6 +12,8 @@ const stripePromise = loadStripe(
   'pk_test_51LvCDeIfKde4uOaxQPDjUhR01xB1KPoSe5lFb71jhqidBFQ46lO0IrlQ91bXSNhjd9mM7dOzNYFWmPVKzs86dfsP004e0jqHDI'
 );
 
+// test credit card info: https://docs.stripe.com/checkout/quickstart
+
 const initialValues = {
   billingAddress: {
     firstName: '',
@@ -21,7 +23,7 @@ const initialValues = {
     street2: '',
     city: '',
     province: '',
-    zipCode: '',
+    postalCode: '',
   },
   shippingAddress: {
     isSameAddress: true,
@@ -32,7 +34,7 @@ const initialValues = {
     street2: '',
     city: '',
     province: '',
-    zipCode: '',
+    postalCode: '',
   },
   email: '',
   phoneNumber: '',
@@ -47,8 +49,8 @@ const checkoutSchema = [
       street1: yup.string().required('required'),
       street2: yup.string(),
       city: yup.string().required('required'),
-      state: yup.string().required('required'),
-      zipCode: yup.string().required('required'),
+      province: yup.string().required('required'),
+      postalCode: yup.string().required('required'),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
@@ -73,11 +75,11 @@ const checkoutSchema = [
         is: false,
         then: () => yup.string().required('required'),
       }),
-      state: yup.string().when('isSameAddress', {
+      province: yup.string().when('isSameAddress', {
         is: false,
         then: () => yup.string().required('required'),
       }),
-      zipCode: yup.string().when('isSameAddress', {
+      postalCode: yup.string().when('isSameAddress', {
         is: false,
         then: () => yup.string().required('required'),
       }),
