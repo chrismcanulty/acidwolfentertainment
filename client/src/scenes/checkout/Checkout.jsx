@@ -6,6 +6,13 @@ import * as yup from 'yup';
 import Shipping from './Shipping';
 import Payment from './Payment';
 import { shades } from '../../theme';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(
+  'pk_test_51LvCDeIfKde4uOaxQPDjUhR01xB1KPoSe5lFb71jhqidBFQ46lO0IrlQ91bXSNhjd9mM7dOzNYFWmPVKzs86dfsP004e0jqHDI'
+);
+
+// test credit card info: https://docs.stripe.com/checkout/quickstart
 
 const initialValues = {
   billingAddress: {
@@ -16,7 +23,7 @@ const initialValues = {
     street2: '',
     city: '',
     province: '',
-    zipCode: '',
+    postalCode: '',
   },
   shippingAddress: {
     isSameAddress: true,
@@ -27,7 +34,7 @@ const initialValues = {
     street2: '',
     city: '',
     province: '',
-    zipCode: '',
+    postalCode: '',
   },
   email: '',
   phoneNumber: '',
@@ -42,8 +49,8 @@ const checkoutSchema = [
       street1: yup.string().required('required'),
       street2: yup.string(),
       city: yup.string().required('required'),
-      state: yup.string().required('required'),
-      zipCode: yup.string().required('required'),
+      province: yup.string().required('required'),
+      postalCode: yup.string().required('required'),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
@@ -68,11 +75,11 @@ const checkoutSchema = [
         is: false,
         then: () => yup.string().required('required'),
       }),
-      state: yup.string().when('isSameAddress', {
+      province: yup.string().when('isSameAddress', {
         is: false,
         then: () => yup.string().required('required'),
       }),
-      zipCode: yup.string().when('isSameAddress', {
+      postalCode: yup.string().when('isSameAddress', {
         is: false,
         then: () => yup.string().required('required'),
       }),
@@ -112,7 +119,25 @@ const Checkout = () => {
   };
 
   async function makePayment(values) {
-    // Stripe logic to come
+    const stripe = await stripePromise;
+    const requestBody = {
+      userName: [values.firstName, values.lastName].join(' '),
+      email: values.email,
+      products: cart.map(({ id, count }) => ({
+        id,
+        count,
+      })),
+    };
+
+    const response = await fetch('http://localhost:1337/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody),
+    });
+    const session = await response.json();
+    await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
   }
 
   return (
@@ -174,7 +199,6 @@ const Checkout = () => {
                       borderRadius: 0,
                       padding: '15px 40px',
                     }}
-                    onClick={() => setActiveStep(activeStep - 1)}
                   >
                     Back
                   </Button>
