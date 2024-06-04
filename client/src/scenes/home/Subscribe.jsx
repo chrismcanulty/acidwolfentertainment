@@ -6,7 +6,7 @@ const Subscribe = () => {
   const [email, setEmail] = useState('');
 
   return (
-    <Box width="80%" margin="80px auto" textAlign="center">
+    <Box width="85%" margin="80px auto" textAlign="center">
       <IconButton>
         <MarkEmailReadOutlinedIcon fontSize="large" />
       </IconButton>

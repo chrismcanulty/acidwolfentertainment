@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Badge, Box, IconButton } from '@mui/material';
+import { Badge, Box, IconButton, Typography } from '@mui/material';
 import {
   PersonOutline,
   ShoppingBagOutlined,
@@ -20,7 +20,7 @@ const Navbar = () => {
       display="flex"
       alignItems="center"
       width="100%"
-      height="60px"
+      height="200px"
       backgroundColor="rgba(255, 255, 255, 0.95"
       color="black"
       position="fixed"
@@ -29,7 +29,7 @@ const Navbar = () => {
       zIndex="1"
     >
       <Box
-        width="80%"
+        width="85%"
         margin="auto"
         display="flex"
         justifyContent="space-between"
@@ -40,7 +40,17 @@ const Navbar = () => {
           sx={{ '&:hover': { cursor: 'pointer' } }}
           color={shades.secondary[500]}
         >
-          ACID WOLF ENTERTAINMENT
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <img
+              alt="logo"
+              width="200px"
+              height="200px"
+              src={require('../../assets/logo/AcidWolfLogo.jpg')}
+            />
+            <Typography ml="20px" variant="h3">
+              ACID WOLF ENTERTAINMENT
+            </Typography>
+          </Box>
         </Box>
         <Box
           display="flex"
