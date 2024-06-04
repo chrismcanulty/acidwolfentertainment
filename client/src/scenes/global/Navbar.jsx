@@ -59,10 +59,10 @@ const Navbar = () => {
           zIndex="2"
         >
           <IconButton sx={{ color: 'black' }}>
-            <SearchOutlined />
+            <SearchOutlined fontSize="large" />
           </IconButton>
           <IconButton sx={{ color: 'black' }}>
-            <PersonOutline />
+            <PersonOutline fontSize="large" />
           </IconButton>
           <Badge
             badgeContent={cart.length}
@@ -82,11 +82,11 @@ const Navbar = () => {
               onClick={() => dispatch(setIsCartOpen({}))}
               sx={{ color: 'black' }}
             >
-              <ShoppingBagOutlined />
+              <ShoppingBagOutlined fontSize="large" />
             </IconButton>
           </Badge>
           <IconButton sx={{ color: 'black' }}>
-            <MenuOutlined />
+            <MenuOutlined fontSize="large" />
           </IconButton>
         </Box>
       </Box>
