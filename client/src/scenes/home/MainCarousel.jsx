@@ -20,6 +20,8 @@ export const heroTextureImports = importAll(
 const MainCarousel = () => {
   const isNonMobile = useMediaQuery('(min-width:600px)');
 
+  console.log('hero', heroTextureImports);
+
   return (
     <Carousel
       infiniteLoop={true}
@@ -64,7 +66,7 @@ const MainCarousel = () => {
             alt={`carousel-${index}`}
             style={{
               width: '100%',
-              height: '700px',
+              height: '500px',
               // objectFit css property: allows for responsive behaviour,
               // suitable for images where center or image is most important part
               objectFit: 'cover',
@@ -73,7 +75,7 @@ const MainCarousel = () => {
           />
           <Box
             color="white"
-            padding="20px"
+            padding="15px"
             borderRadius="1px"
             textAlign="left"
             backgroundColor="rgb(0, 0, 0, 0.4)"
