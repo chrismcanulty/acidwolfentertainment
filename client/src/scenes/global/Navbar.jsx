@@ -6,6 +6,7 @@ import {
   MenuOutlined,
   SearchOutlined,
 } from '@mui/icons-material';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import { useNavigate } from 'react-router-dom';
 import { shades } from '../../theme';
 import { setIsCartOpen } from '../../state';
@@ -59,10 +60,16 @@ const Navbar = () => {
           zIndex="2"
         >
           <IconButton sx={{ color: 'black' }}>
-            <SearchOutlined fontSize="large" />
+            <InstagramIcon fontSize="large" />
           </IconButton>
           <IconButton sx={{ color: 'black' }}>
-            <PersonOutline fontSize="large" />
+            <img
+              alt="kindle"
+              width="25px"
+              height="25px"
+              src={require('../../assets/icons/Kindle.png')}
+              style={{ borderRadius: '5px' }}
+            />
           </IconButton>
           <Badge
             badgeContent={cart.length}
